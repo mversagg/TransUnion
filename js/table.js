@@ -1,8 +1,9 @@
-let colors = ['green', 'red', 'blue', 'purple', 'pink', 'orange', 'yellow', 'lime', 'grey'];
+let colors = ['green', 'red', 'blue', 'purple', 'pink', 'orange', 'lime', 'grey', 'light_blue',
+'light_turq', 'REBECCAPURPLE'];
 let icons = ['fa-blind', 'fa-binoculars', 'fa-bomb', 'fa-code', 'fa-eye', 'fa-send', 'fa-photo', 'fa-television', 'fa-tags'];
 
 $(function() {
-	$('td').click(randomize);
+	$('td').click(gameController);
 	randomize();
 });
 
@@ -12,7 +13,6 @@ function randomize() {
 
 	$('.tile').each(function(index) {
 		let tile = $(this);
-		
 		let temp = $(this);
 		temp.removeClass();
 		temp.addClass('tile ' + colors[index]);
@@ -21,6 +21,7 @@ function randomize() {
 			let icon = $(this);
 			icon.removeClass();
 			icon.addClass('fa ' + icons[index]);
+			icon.addClass('fa-2x');
 		});
 
 		/*if (index > 0) {
@@ -54,8 +55,13 @@ function randomize() {
 				});
 				tile.fadeIn(200);
 			});
-		}
-	});*/
+		}*/
+	});
+}
+
+function gameController(event) {
+	randomize();
+
 }
 
 function shuffle(a) {
