@@ -113,6 +113,8 @@
 .small_img {
 	max-width: 95px;
 	max-height: 95px;
+	float: left;
+	margin-right: 20px;
 }
 
 .big_txt {
@@ -146,6 +148,11 @@ table {
 	.big_txt {
 		font-size: 1em;
 	}
+
+	.side_tile {
+		height: 50px;
+		width: 50px;
+	}
 }
 
 @media (min-width: 768px) {
@@ -159,6 +166,11 @@ table {
 		border-spacing: 6px;
 		border-collapse: separate;
 	}
+
+	.side_tile {
+		height: 70px;
+		width: 70px;
+	}
 }
 
 @media (min-width: 992px) {
@@ -166,6 +178,11 @@ table {
 	   	height: 150px;
 		width: 150px;
 		font-size: 2.05em;
+	}
+
+	.side_tile {
+		height: 80px;
+		width: 80px;
 	} 
 }
 
@@ -174,6 +191,11 @@ table {
 	   	height: 175px;
 	   	width: 175px;
 		font-size: 2.4em;
+	}
+
+	.side_tile {
+		height: 94px;
+		width: 94px;
 	}
 }
 
