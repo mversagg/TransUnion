@@ -1,6 +1,8 @@
-let colors = ['green', 'red', 'blue', 'purple', 'pink', 'orange', 'lime', 'grey', 'light_blue',
-'light_turq', 'REBECCAPURPLE'];
-let icons = ['fa-blind', 'fa-binoculars', 'fa-bomb', 'fa-code', 'fa-eye', 'fa-send', 'fa-photo', 'fa-television', 'fa-tags'];
+let colors = [ 'purple', 'plum', 'monza',
+ 'medium_purple', 'cinnabar', 'chestnut_rose', 'tall_poppy', 'sm_blue',
+  'pict_blue', 'royal_blue', 'cool_green', 'gossip', 'salem', 'fire_bush',
+  'light_orange', 'mid_orange', 'dark_pink', 'turq', 'aqua', 'butter'];
+let icons = ['fa-blind', 'fa-binoculars', 'fa-bomb', 'fa-code', 'fa-eye', 'fa-send', 'fa-photo', 'fa-television', 'fa-tags', 'fa-blind', 'fa-binoculars', 'fa-bomb', 'fa-code', 'fa-eye', 'fa-send', 'fa-photo', 'fa-television', 'fa-tags'];
 
 $(function() {
 	$('td').click(gameController);
