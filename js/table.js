@@ -17,6 +17,11 @@ $(function() {
 });
 
 function start(data) {
+	if (chapterNumber - 1 === 1) {
+		missedClicks = 0;
+		gameTimer = 0;
+	}
+
 	rankIndex = 0;
 	gameEnd = false;
 	gameData = data;
@@ -50,10 +55,13 @@ function start(data) {
 }
 
 function endGame(t, mc) {
+	$('#game_board').fadeOut();
 	createChapter(chapterNumber++);
 
 	if (chapterNumber > 3) {
 		gameOver(t, mc);
+	} else {
+		chapterNumber = 2;
 	}
 }
 
