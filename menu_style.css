@@ -124,8 +124,18 @@ body {
 
 }
 
+.icon_res_row {
+	margin-top: 15px;
+}
 
 
+.icon_affect {
+	margin-top: 15px;
+}
 
+
+.final_score {
+	color: green;
+}
 
 
