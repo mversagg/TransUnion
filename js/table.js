@@ -19,7 +19,7 @@ function randomize() {
 		temp.removeClass();
 		temp.addClass('tile ' + colors[index]);
 
-		$('.fa').each(function(index) {
+		$('.tile_icon').each(function(index) {
 			let icon = $(this);
 			icon.removeClass();
 			icon.addClass('fa ' + icons[index]);

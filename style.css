@@ -86,41 +86,116 @@
 	background-color: #22A7F0;
 }
 
-td {
+.tile {
 	color: white;
 	text-align: center;
 	border-radius: 15px;
+	border-color: white;
+}
+
+.side_tile {
+	background-color: lightgrey;
+	color: white;
+	text-align: center;
+	border-radius: 15px;
+	border-color: white;
+	height: 94px;
+	width: 94px;
+}
+
+.center_vertical {
+   top: 50%;
+   left: 50%;
+   transform: translate3d(-50%,-50%, 0);
+   position: absolute;
+}
+
+.small_img {
+	max-width: 95px;
+	max-height: 95px;
+	float: left;
+	margin-right: 20px;
+}
+
+.big_txt {
+	font-size: 1.5em;
+}
+
+table {
+	border-spacing: 10px;
+	border-collapse: separate;
 }
 
 @media (max-width: 767px) {
-	td {
+	.tile {
 	   	height: 100px;
 		width: 100px;
+		min-width: 100px;
+		min-height: 100px;
 		font-size: 1.35em;
+	}
+
+	table {
+		border-spacing: 3px;
+		border-collapse: separate;
+	}
+
+	.small_img {
+		max-width: 75px;
+		max-height: 75px;
+	}
+
+	.big_txt {
+		font-size: 1em;
+	}
+
+	.side_tile {
+		height: 50px;
+		width: 50px;
 	}
 }
 
 @media (min-width: 768px) {
-	td {
+	.tile {
 	   	height: 150px;
 		width: 150px;
 		font-size: 2.05em;
 	}
+
+	table {
+		border-spacing: 6px;
+		border-collapse: separate;
+	}
+
+	.side_tile {
+		height: 70px;
+		width: 70px;
+	}
 }
 
 @media (min-width: 992px) {
-   td {
-	   	height: 175px;
-		width: 175px;
-		font-size: 2.4em;
+   .tile {
+	   	height: 150px;
+		width: 150px;
+		font-size: 2.05em;
+	}
+
+	.side_tile {
+		height: 80px;
+		width: 80px;
 	} 
 }
 
 @media (min-width: 1200px) {
-   	td {
-	   	height: 200px;
-	   	width: 200px;
-		font-size: 2.75em;
+   	.tile {
+	   	height: 175px;
+	   	width: 175px;
+		font-size: 2.4em;
+	}
+
+	.side_tile {
+		height: 94px;
+		width: 94px;
 	}
 }
 
