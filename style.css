@@ -1,64 +1,126 @@
-td {
-	height: 200px;
-	width: 200px;
-	text-align: center;
-	font-size: 3em;
-	color: white;
-}
-
-.tile:hover {
-    -webkit-transform: rotateY(-180deg);
-    transform: rotateY(-180deg);
-}
-
-.green {
-	background-color: green;
-}
-
-.red {
-	background-color: red;
-}
-
-.blue {
-	background-color: blue;
-}
-
 .purple {
 	background-color: purple;
-}
-.45A163 {
-	background-color: #45A163;	
 }
 
 .turq {
 	background-color: #16FF77;
 }
 
-.26CC5C {
-	background-color: #26CC5C;
+.plum {
+	background-color: #913D88;
 }
 
-.light_blue {
-	background-color:#4A99A1;
+.royal_blue {
+	background-color: #4183D7;
 }
 
-.orange {
-	background-color: orange;
+.cool_green {
+	background-color: #26A65B;
 }
 
-.yellow {
-	background-color: yellow;
+.free_green {
+	background-color: #03A678;
+}
+.jade {
+	background-color: #00B16A;
 }
 
-.pink {
-	background-color: pink;
+.gossip {
+	background-color: #87D37C;
+}
+.salem {
+	background-color: #1E824C;
+}
+.fire_bush {
+	background-color: #EB9532;
+}
+.mid_orange {
+	background-color: #F9690E;
+}
+.light_orange {
+	background-color: #F4B350;
+}
+.dark_pink {
+	background-color: #DB0A5B;
+}
+.turq {
+	background-color: #03C9A9;
+}
+.aqua {
+	background-color: #1BA39C;
+}
+.butter {
+	background-color: #F39C12;
 }
 
-.lime {
-	background-color: limegreen;
+.monza {
+	background-color: #CF000F;
 }
 
-.grey {
-	background-color: grey;
+.trans_union_blue {
+	background-color: #0295BE;
+}
+
+.studio_purple {
+	background-color: #8E44AD;
+}
+
+.medium_purple {
+	background-color: #BF55EC;
+}
+.cinnabar {
+	background-color: #E74C3C;
+}
+
+.chestnut_rose {
+	background-color: #D24D57;
+}
+.tall_poppy {
+	background-color: #C0392B;
+}
+.sm_blue {
+	background-color: #446CB3;
+}
+
+.pict_blue {
+	background-color: #22A7F0;
+}
+
+td {
+	color: white;
+	text-align: center;
+	border-radius: 15px;
+}
+
+@media (max-width: 767px) {
+	td {
+	   	height: 100px;
+		width: 100px;
+		font-size: 1.35em;
+	}
+}
+
+@media (min-width: 768px) {
+	td {
+	   	height: 150px;
+		width: 150px;
+		font-size: 2.05em;
+	}
+}
+
+@media (min-width: 992px) {
+   td {
+	   	height: 175px;
+		width: 175px;
+		font-size: 2.4em;
+	} 
+}
+
+@media (min-width: 1200px) {
+   	td {
+	   	height: 200px;
+	   	width: 200px;
+		font-size: 2.75em;
+	}
 }
 

@@ -1,0 +1,18 @@
+#background{
+	width: 100%; //fallback
+   	width: 100vw;
+   	margin: 0 auto;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.trans_union_blue {
+	background-color: #0295BE;
+}
+
+#tu_icon {
+	filter: brightness(0) invert(1);
+}
