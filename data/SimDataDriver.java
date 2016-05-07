@@ -8,9 +8,10 @@ public class SimDataDriver
     public static void main(String[] args)
     {
     	//set up the arraylist for holding all data
-    	ArrayList<SimData> data = new ArrayList<Integer>();
+    	ArrayList<SimData> data = new ArrayList<SimData>();
 
-		data.add()
+		addDataRyan(data);
+		addDataJules(data);
 
 		Collections.sort(data, new SimData());
 
@@ -24,12 +25,12 @@ public class SimDataDriver
 
     }
 
-    public static void addDataRyan(ArrayList<Integer> d)
+    public static void addDataRyan(ArrayList<SimData> d)
     {
     	d.add(new SimData("Start College", "Add Student Loan", -10));
     }
 
-    public static void addDataJules(ArrayList<Integer> d)
+    public static void addDataJules(ArrayList<SimData> d)
     {
     	d.add(new SimData("Bad Spouse Credit", "Effects Score", -40));
     }
