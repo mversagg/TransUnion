@@ -10,19 +10,20 @@ let gameData;
 let gameTimer = 0;
 let gameEnd = false;
 let missedClicks = 0;
+let chapterNumber = 2;
 
 $(function() {
 	$('td').click(gameController);
 });
 
 function start(data) {
-	gameTimer = 0;
 	rankIndex = 0;
-	missedClicks = 0;
 	gameEnd = false;
 	gameData = data;
 	shuffle(gameIcons);
 	shuffle(colors);
+
+	$('#gameNumber').text(chapterNumber - 1);
 
 	$('.tile').each(function(index) {
 		let tile = $(this);
@@ -49,7 +50,11 @@ function start(data) {
 }
 
 function endGame(t, mc) {
-	gameOver(t, mc);
+	createChapter(chapterNumber++);
+
+	if (chapterNumber > 3) {
+		gameOver(t, mc);
+	}
 }
 
 function randomize() {
