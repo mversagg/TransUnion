@@ -8,7 +8,8 @@ $(function() {
 $('#tu_icon').fadeIn();
 
 var countdown = false;
-var seconds_left = 11;
+//var seconds_left = 11;
+var seconds_left = 1;
 var og_seconds = 11;
 var map_icon_to_number = {};
 var current_chapter = 0;
