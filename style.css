@@ -121,6 +121,11 @@
 	font-size: 1.5em;
 }
 
+.tracker {
+	font-size: 3em;
+	color: #1E824C;
+}
+
 table {
 	border-spacing: 10px;
 	border-collapse: separate;
