@@ -110,6 +110,7 @@ window.setInterval(function() {
 		seconds_left -= 1;
 		$("#timer").text(seconds_left);
 		if(seconds_left == 0) {
+			console.log('seconds ended');
 			$("#chapter_menu").fadeOut();
 			$("#background").fadeOut();
 			$('body').removeClass();

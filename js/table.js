@@ -55,8 +55,9 @@ function start(data) {
 }
 
 function endGame(t, mc) {
-	$('#game_board').fadeOut();
-	createChapter(chapterNumber++);
+	$('#game_board').fadeOut(function() {
+		createChapters(chapterNumber++);
+	});
 
 	if (chapterNumber > 3) {
 		gameOver(t, mc);
