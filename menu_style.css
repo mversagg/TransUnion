@@ -1,18 +1,131 @@
+@import url(https://fonts.googleapis.com/css?family=Oswald:400,700);
+
 #background{
 	width: 100%; //fallback
    	width: 100vw;
-   	margin: 0 auto;
+   	margin-left: auto;
+
+}
+html {
+  height:100%;
 }
 
 body {
-	margin: 0;
+	margin: 0 auto;
 	padding: 0;
+	font-family: Oswald !important;
+	height: 100%;
+
 }
 
 .trans_union_blue {
 	background-color: #0295BE;
+	height:100%;
+
 }
 
-#tu_icon {
-	filter: brightness(0) invert(1);
+.vertical_center {
+   top: 50%;
+   left: 50%;
+   transform: translate3d(-50%,-50%, 0);
+   position: absolute;
 }
+
+.icon {
+	width: auto;
+	height: auto;
+	margin-left:auto;
+	margin-right:auto;
+    -webkit-filter: invert(100%) brightness(100);
+}
+
+#game_title {
+	color: #ffffff;
+	font-size: 500% !important;
+
+}
+
+#menu_content {
+	margin: auto;
+	display: table-cell;
+    vertical-align: middle;
+}
+
+#button_container {
+	margin-top: 10px;
+}
+
+#close_modal {
+	margin: 0 auto;
+	margin-right: 5%;
+	padding: 0 auto;
+	border: 0 auto;
+}
+
+.menu_button {
+	width : 100%;
+	margin-top: 10px;
+	margin: auto;
+	font-size: 200% !important;
+	color: #0295BE !important;
+}
+
+.chapter_button {
+	width : 75%;
+	margin-left:10%;
+	left: 10px;
+	color: #0295BE !important;
+	font-size: 200% !important;
+
+}
+
+.chapter_btn_container {
+	left: 10px;
+}
+
+#chapter_menu {
+	height:100%;
+}
+.chapter_row {
+	margin-top: 40px;
+}
+
+.background_white {
+	background-color: white;
+}
+
+.chapter_icon_container {
+	text-align: center;
+}
+
+/*This is the big logo*/
+.chapters_icon {
+	right : 10 px;
+    -webkit-filter: invert(100%);
+    color: white;
+}
+
+/*These are the littler icons*/
+.chapter_icon {
+	right : 10 px;
+    color: white;
+}
+
+.icon_descrip {
+	text-align: left;
+	color: white;
+	font-size: 150% !important;
+}
+
+#timer {
+	color: white;
+	font-size: 200% !important;
+	text-align: left;
+
+}
+
+
+
+
+
+
