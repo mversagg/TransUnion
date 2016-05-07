@@ -3,19 +3,39 @@
 <html>
 <head>
 	<title>Tile Game</title>
+	<!-- Mobile first meta tag. -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" >
+
 	<link rel='shortcut icon' href='favicon.ico' type='image/x-icon'/ > 
 	<meta name="viewport" content="width=device-width">
 	<meta charset="UTF-8">
 	
 	<link rel="stylesheet" type="text/css" href="style.css" />
+	<link rel="stylesheet" type="text/css" href="menu_style.css" />
 	<link rel="stylesheet" type="text/css" href="fontawesome/css/font-awesome.min.css">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 	<script src="js/table.js"></script>
+
+	<link rel="stylesheet" href="./bootstrap-3.3.6-dist/css/bootstrap.min.css" />
 </head>
 
 <body>
-	<table>
+<div id="background" class="trans_union_blue container-fluid">
+
+	<div id="menu_content" class="container-fluid">
+		<div class="row">
+			<div id="tu_icon" class="col-md-1">
+				<img src="./img/blue_icon.png" ></img>
+			</div>
+			<div id="game_title">
+				
+			</div>
+		</div>
+	</div>
+</div>
+	<div class="container" style="display:none;">
+	<table class="gameboard">
 		<tr>
 			<td class="tile"><i class="fa"></td>
 			<td class="tile"><i class="fa"></td>
@@ -52,5 +72,5 @@
 			<td class="tile"><i class="fa"></td>
 		</tr>
 	</table>
-
+	</div>
 </body>
