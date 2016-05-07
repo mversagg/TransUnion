@@ -91,7 +91,6 @@
 	    </div>
 	  </div>
 	</div>
-
 	<div id="game_board" class="container center_vertical" style="display: none;">
 		<div class="row">
 			<div class="col-sm-12">
@@ -176,5 +175,39 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="modal fade" id="game-over-modal" tabindex="-1" role="dialog" aria-labelledby="game_over_modal_label">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+		      <div class="modal-header">
+		      	<button id="close_modal" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		      	<h1 class="modal-title" > 
+		      	Final Score <b id="total_final"> 0
+		      	  </b></h1>
+		      </div>
+		      <div class="modal-body">
+		      <p id="modal_results">
+		      	<h2>clicks Incorrect:  <b id="incorrect">0</b> </h2> 
+		      	<h2>Time Taken:  <b id="time_taken"> 0  sec </b> </h2> 
+		      	</br>
+		      	</br>
+		      	<h1>Simulator Summary</h1>
+		      	<hr>
+		      	<h3> Initial Credit: <b id="initial_credit"> 710 </b>
+		      	<h3> Final Credit: <b class="final_score"> 810 </b></h3>
+		      	<div id="icon_results" class="container-fluid">
+
+		      	</div>
+		      </p>
+
+		      	
+
+
+		      </div>
+	    </div>
+	  </div>
+	</div>
+	<button type="button" id="game_over_button" class="btn btn-default btn-lg menu_button"  data-toggle="modal" data-target="#game-over-modal" style="display:none;">
+	</button>
 </body>
 </html>

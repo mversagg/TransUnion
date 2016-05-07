@@ -1,25 +1,27 @@
+let chapter_icons = ['fa-graduation-cap', 'fa-glass',
+	 'fa-book', 'fa-car', 'fa-briefcase', 
+	 'fa-usd', 'fa-home', 'fa-diamond', 'fa-rocket'];
+
 $(function() {
 	console.log('MENU JS IS LOADED');
 	$('#start_game_btn').click(start_game);
 	$('#chapter2').prop('disabled', true);
 	$('#chapter3').prop('disabled', true);
+	// game_over(chapter_icons);
 });
 
+let rand_colors = ['purple', 'blue', 'orange', 'green', 'red'];
 $('#tu_icon').fadeIn();
 
 var countdown = false;
-//var seconds_left = 11;
-var seconds_left = 1;
+var seconds_left = 11;
 var og_seconds = 11;
 var map_icon_to_number = {};
 var current_chapter = 0;
 var score = 0;
-var clicks_correct = 0;
 var clicks_incorrect = 0;
-
-	let chapter_icons = ['fa-graduation-cap', 'fa-glass',
-	 'fa-book', 'fa-car', 'fa-briefcase', 
-	 'fa-usd', 'fa-home', 'fa-diamond', 'fa-rocket'];
+var rank_array = [];
+var initial_score = 700;
 
 
 function start_game(event) {
@@ -35,7 +37,6 @@ function start_game(event) {
 	createChapters(1);
 };
 
-var rank_array = [];
 function createChapters(chapterNumber) {
 	$('#chapter_menu').fadeIn(1200);
 	$("#background").fadeIn();
@@ -56,10 +57,12 @@ function createChapters(chapterNumber) {
 	for (var game1 = 0; game1 < numChapters; game1++) {
 		console.log(life_events[chapter_icons[game1] + ""]);
 		console.log([map_icon_to_number[chapter_icons[game1] + ""]]);
+		
 		//temp sorted will contain the mappings of iconName to value
+		var curIconName = chapter_icons[game1];
 		temp_sorted.push([chapter_icons[game1], 
-							life_events[chapter_icons[game1] + ""]
-					 			[map_icon_to_number[chapter_icons[game1] + ""]] ['value']
+							life_events[curIconName + ""]
+							[map_icon_to_number[curIconName]]['value']
 					 ]);
 	}
 	temp_sorted.sort(function(a, b) {
@@ -67,23 +70,31 @@ function createChapters(chapterNumber) {
 	});
 	rank_array = [];
 	for (var each = 0; each < temp_sorted.length; each++) {
-		console.log(temp_sorted[each][0] + ": " + temp_sorted[each][1]);
-		var icon_object = {"rank": each, "icon" : temp_sorted[each][0],
-		"score": temp_sorted[each][1]
-		};
+		var curIconName = temp_sorted[each][0];
+		console.log(curIconName + ": " + temp_sorted[each][1]);
+		var icon_object = {
+			"rank": each, 
+			"icon" : curIconName,
+			"score": temp_sorted[each][1],
+			"descrip": life_events[curIconName + ""]
+				[map_icon_to_number[curIconName + ""]]
+					["description"]
+			};
 		rank_array.push(icon_object);
 	}
 	var count = 0;
+	//temp sorted = [[icon_name, point_value]]
 	for (var i = 0; i < temp_sorted.length; i++) {
+		var curIconName = temp_sorted[i][0];
 	$('#chapter_menu').append("<div id='row" +  i + "' class='row chapter_row'>" +
 		"<div class='col-xs-4 chapter_icon_container'>" + 
-			"<i class='fa " + temp_sorted[i][0] + " chapter_icon fa-4x'></i>" + 
+			"<i class='fa " + curIconName + " chapter_icon fa-4x'></i>" + 
 			"</div>" + 
 			"<div class='col-xs-8'>" +
 				"<div class='chapter_btn_container'>" + 
 					"<p class='icon_descrip'>" 
-					 + life_events[temp_sorted[i][0] + ""]
-					 [map_icon_to_number[chapter_icons[game1] + ""]]
+					 + life_events[curIconName + ""]
+					 [map_icon_to_number[curIconName + ""]]
 					 ["description"] +  "</p>" + 
 				"</div>" +
 			"</div>" + 
@@ -103,19 +114,114 @@ window.setInterval(function() {
 			$("#background").fadeOut();
 			$('body').removeClass();
 			$('body').addClass("background_white");
-
 			countdown = false;
 			rank_array.forEach(function(val){
 				console.log("rank"  + ": " + val['rank'] );
 				console.log("icon"  + ": " + val['icon'] );
-				console.log("score"  + ": " + val['score'] )
+				console.log("score"  + ": " + val['score'] );
 			});
 			$('#game_board').fadeIn();
 			start(rank_array);
 			seconds_left = og_seconds + 5;
+			og_seconds = seconds_left;
 		}
 	}
 }, 1000);
+
+
+function changeColor(final_score, class_name) {
+if (final_score < 600) {
+		$(class_name).each(function(){
+			$(this).css("color", 'red');
+		});
+	}
+	else if (final_score >= 600 && final_score < 657) {
+		$(class_name).each(function(){
+			$(this).css("color", 'OrangeRed');
+		});
+	}
+	else if (final_score >= 657 && final_score < 719) {
+		$(class_name).each(function(){
+			$(this).css("color", 'orange');
+		});
+	}
+	else if (final_score >= 719 && final_score < 780) {
+		$(class_name).each(function(){
+			$(this).css("color", 'gold');
+		});
+	}
+	else if (final_score >= 780 && final_score <= 800) {
+		$(class_name).each(function(){
+			$(this).css("color", 'YellowGreen');
+		});
+	}
+}
+
+function game_over(time, clicks) {
+	console.log("game over button");
+	$("#icon_results").empty();
+	var adder = 0;
+	var final_score = initial_score;
+	rank_array.forEach(function(val){
+				console.log("rank"  + ": " + val['rank'] );
+				console.log("icon"  + ": " + val['icon'] );
+				console.log("score"  + ": " + val['score']);
+				console.log("description"  + ": " + val['descrip']);
+
+			$("#icon_results").append("<div class='row' id='icon_res1'>"
+		      			+ "<div class='col-xs-2 icon_res_row'>"
+		      			+ "<i class='icon_rand fa " 
+		      			+ val['icon']
+		      			+ " fa-3x'></i>"
+		      			+ "</div>"
+		      			+ "<div class='col-xs-8 icon_desc_row'>"
+			      		+	val['descrip']
+			      		+ "</div>"
+			      		+ "<div class='col-xs-2 icon_affect'>"
+			      		+  val['score']
+		      			+ "</div>"
+		      		    + "</div>");
+		final_score += val['score'];
+
+	});
+	$('.icon_rand').each(function() {
+	})
+	changeColor(final_score, '.final_score'); 
+	changeColor(initial_score, '#initial_credit');
+	if (final_score >= 850) {
+		final_score = 850;
+	}
+	if (final_score <= 200) {
+		final_score = 200;
+	}
+
+	$('#total_final').text(time + clicks);
+	var total_score = time + clicks;
+	if (total_score < 20) {
+		$('#total_final').css("color", "green");	
+	}
+	else if (total_score < 25) {
+		$('#total_final').css("color", "orange");
+	}
+	else  {
+		$('#total_final').css("color", "red");
+	}
+
+
+	$('#time_taken').each(function(){
+		$(this).text(time + " clicks");
+		$(this).css("color", "red");
+	});
+
+	$('#incorrect').text(clicks);
+	$('#incorrect').css("color", "red");
+
+	$("#game_over_button").click();
+	$('.final_score').each(function(){
+		$(this).text(final_score);
+	});
+
+	}	
 
 
 var life_events = 
