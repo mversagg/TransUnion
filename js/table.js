@@ -83,6 +83,7 @@ function gameController(event) {
 	if (clickIcon === gameData[rankIndex].icon) {
 		$('.tracker').each(function() {
 			let track = $(this);
+			console.log(track);
 			if (track.data('rank') == rankIndex) {
 				track.addClass(clickIcon);
 			}
