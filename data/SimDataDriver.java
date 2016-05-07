@@ -28,6 +28,22 @@ public class SimDataDriver
     public static void addDataRyan(ArrayList<SimData> d)
     {
     	d.add(new SimData("Start College", "Add Student Loan", -10));
+    	d.add(new SimData("Graduate College", "LOANS Due", 5));
+    	d.add(new SimData("Graduate College", "LOANS on Time", 30));
+    	d.add(new SimData("Graduate College", "LOANS 30 Days Late", -30));
+    	d.add(new SimData("New Job Higher Income", "Buy Car", -10));
+    	d.add(new SimData("New Job Higher Income", "Buy House", -10));
+    	d.add(new SimData("New Job Higher Income", "Pay Down Debt", 100));
+    	d.add(new SimData("New Job Lower Income", "Defualt on Loan", -100));
+    	d.add(new SimData("New Job Lower Income", "File Bankrupt", -100));
+    	d.add(new SimData("New Job Lower Income", "Go to Collections", -100));
+    	d.add(new SimData("New Job Lower Income", "Late 30 Days", -30));
+    	d.add(new SimData("New Job Lower Income", "Late 60 Days", -60));
+    	d.add(new SimData("New Job Lower Income", "Late 90 Days", -90));
+    	d.add(new SimData("Unexpected Medical Exspense", "Pay Exspense", 55));
+    	d.add(new SimData("Unexpected Medical Exspense", "Go To Collections", -100));
+    	d.add(new SimData("Unexpected Medical Exspense", "Max Existing Credit", -46));
+    	d.add(new SimData("Unexpected Medical Exspense", "Seek Loans", -10));
     }
 
     public static void addDataJules(ArrayList<SimData> d)
