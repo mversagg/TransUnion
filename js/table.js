@@ -69,6 +69,7 @@ function endGame(t, mc) {
 		});
 	} else {
 		game_over(gameTimer, missedClicks);
+		$('#game_board').fadeOut();
 		$('.tracker').each(function() {
 			$(this).removeClass();
 			$(this).addClass('tracker fa');
