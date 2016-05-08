@@ -11,6 +11,7 @@ let gameTimer = 0;
 let gameEnd = false;
 let missedClicks = 0;
 let chapterNumber = 2;
+let gameInterval;
 
 $(function() {
 	$('td').click(gameController);
@@ -44,24 +45,34 @@ function start(data) {
 		});
 	});
 
-	window.setInterval(function() {
+	gameInterval = window.setInterval(function() {
 		if (!gameEnd) {
 			gameTimer += 1;
 			$('#gameTimer').text(gameTimer);
 		} else {
 			endGame(gameTimer, missedClicks);
+			clearInterval(gameInterval);
 		}
 	}, 1000);
 }
 
 function endGame(t, mc) {
-	$('#game_board').fadeOut(function() {
-		createChapters(chapterNumber++);
-	});
+	clearInterval(gameInterval);
 
-	if (chapterNumber > 3) {
-		gameOver(t, mc);
+	if (chapterNumber <= 3) {
+		$('#game_board').fadeOut(function() {
+			$('.tracker').each(function() {
+				$(this).removeClass();
+				$(this).addClass('tracker fa');
+			});
+			createChapters(chapterNumber++);
+		});
 	} else {
+		game_over(gameTimer, missedClicks);
+		$('.tracker').each(function() {
+			$(this).removeClass();
+			$(this).addClass('tracker fa');
+		});
 		chapterNumber = 2;
 	}
 }
@@ -87,12 +98,10 @@ function gameController(event) {
 	let row = event.currentTarget.dataset.row;
 	let col = event.currentTarget.dataset.col;
 	let clickIcon = $(event.currentTarget.childNodes[0])[0].classList[2];
-	console.log(clickIcon);
 	
 	if (clickIcon === gameData[rankIndex].icon) {
 		$('.tracker').each(function() {
 			let track = $(this);
-			console.log(track);
 			if (track.data('rank') == rankIndex) {
 				track.addClass(clickIcon);
 			}
