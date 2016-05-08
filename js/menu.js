@@ -1,229 +1,3 @@
-let chapter_icons = ['fa-graduation-cap', 'fa-glass',
-	 'fa-book', 'fa-car', 'fa-briefcase', 
-	 'fa-usd', 'fa-home', 'fa-diamond', 'fa-rocket'];
-
-$(function() {
-	console.log('MENU JS IS LOADED');
-	$('#start_game_btn').click(start_game);
-	$('#chapter2').prop('disabled', true);
-	$('#chapter3').prop('disabled', true);
-	// game_over(chapter_icons);
-});
-
-let rand_colors = ['purple', 'blue', 'orange', 'green', 'red'];
-$('#tu_icon').fadeIn();
-
-var countdown = false;
-var seconds_left = 11;
-var og_seconds = 11;
-var map_icon_to_number = {};
-var current_chapter = 0;
-var score = 0;
-var clicks_incorrect = 0;
-var rank_array = [];
-var initial_score = 700;
-
-
-function start_game(event) {
-	console.log('start game was logged');
-	$('#menu_content').fadeOut(1000, function() {
-			$('#chapter_menu').fadeIn(1200);
-	});
-
-	for (var i = 0; i < chapter_icons.length;i++) {
-		icon = chapter_icons[i];
-		map_icon_to_number[icon + ""] = Math.floor((3 * Math.random()) - 0.05);
-	};
-	createChapters(1);
-};
-
-function createChapters(chapterNumber) {
-	$('#chapter_menu').fadeIn(1200);
-	$("#background").fadeIn();
-	$('body').removeClass();
-	$('body').addClass("trans_union_blue");
-	var numChapters = chapterNumber * 3;
-	$('#chapter_menu').empty();
-	$('#chapter_menu').append("<div class='row'>" +
-			"<div class='col-xs-12'>" +
-				" <div class='col-xs-12'>" +
-					"<img  id='chapters_icon' class='icon img-responsive'" +
-					 "src='./img/grey_icon.png' ></img>" + 
-				"</div></div></div>");
-	$('#chapter_menu').append(
-			"<div id='timer_count_down_div'>"
-			+ "<h1 id='timer'>" +  seconds_left + "</h1>");
-	temp_sorted = [];
-	for (var game1 = 0; game1 < numChapters; game1++) {
-		console.log(life_events[chapter_icons[game1] + ""]);
-		console.log([map_icon_to_number[chapter_icons[game1] + ""]]);
-		
-		//temp sorted will contain the mappings of iconName to value
-		var curIconName = chapter_icons[game1];
-		temp_sorted.push([chapter_icons[game1], 
-							life_events[curIconName + ""]
-							[map_icon_to_number[curIconName]]['value']
-					 ]);
-	}
-	temp_sorted.sort(function(a, b) {
-		return b[1] - a[1];
-	});
-	rank_array = [];
-	for (var each = 0; each < temp_sorted.length; each++) {
-		var curIconName = temp_sorted[each][0];
-		console.log(curIconName + ": " + temp_sorted[each][1]);
-		var icon_object = {
-			"rank": each, 
-			"icon" : curIconName,
-			"score": temp_sorted[each][1],
-			"descrip": life_events[curIconName + ""]
-				[map_icon_to_number[curIconName + ""]]
-					["description"]
-			};
-		rank_array.push(icon_object);
-	}
-	var count = 0;
-	//temp sorted = [[icon_name, point_value]]
-	for (var i = 0; i < temp_sorted.length; i++) {
-		var curIconName = temp_sorted[i][0];
-	$('#chapter_menu').append("<div id='row" +  i + "' class='row chapter_row'>" +
-		"<div class='col-xs-4 chapter_icon_container'>" + 
-			"<i class='fa " + curIconName + " chapter_icon fa-4x'></i>" + 
-			"</div>" + 
-			"<div class='col-xs-8'>" +
-				"<div class='chapter_btn_container'>" + 
-					"<p class='icon_descrip'>" 
-					 + life_events[curIconName + ""]
-					 [map_icon_to_number[curIconName + ""]]
-					 ["description"] +  "</p>" + 
-				"</div>" +
-			"</div>" + 
-		"</div>");
-	}
-	countdown = true;
-	$("body").addClass("trans_union_blue");
-	$("body").css("padding-bottom", "15px");
-};
-
-window.setInterval(function() {
-	if (countdown) {
-		seconds_left -= 1;
-		$("#timer").text(seconds_left);
-		if(seconds_left == 0) {
-			console.log('seconds ended');
-			$("#chapter_menu").fadeOut();
-			$("#background").fadeOut();
-			$('body').removeClass();
-			$('body').addClass("background_white");
-			countdown = false;
-			rank_array.forEach(function(val){
-				console.log("rank"  + ": " + val['rank'] );
-				console.log("icon"  + ": " + val['icon'] );
-				console.log("score"  + ": " + val['score'] );
-			});
-			$('#game_board').fadeIn();
-			start(rank_array);
-			seconds_left = og_seconds + 5;
-			og_seconds = seconds_left;
-		}
-	}
-}, 1000);
-
-
-function changeColor(final_score, class_name) {
-if (final_score < 600) {
-		$(class_name).each(function(){
-			$(this).css("color", 'red');
-		});
-	}
-	else if (final_score >= 600 && final_score < 657) {
-		$(class_name).each(function(){
-			$(this).css("color", 'OrangeRed');
-		});
-	}
-	else if (final_score >= 657 && final_score < 719) {
-		$(class_name).each(function(){
-			$(this).css("color", 'orange');
-		});
-	}
-	else if (final_score >= 719 && final_score < 780) {
-		$(class_name).each(function(){
-			$(this).css("color", 'gold');
-		});
-	}
-	else if (final_score >= 780 && final_score <= 800) {
-		$(class_name).each(function(){
-			$(this).css("color", 'YellowGreen');
-		});
-	}
-}
-
-function game_over(time, clicks) {
-	console.log("game over button");
-	$("#icon_results").empty();
-	var adder = 0;
-	var final_score = initial_score;
-	rank_array.forEach(function(val){
-				console.log("rank"  + ": " + val['rank'] );
-				console.log("icon"  + ": " + val['icon'] );
-				console.log("score"  + ": " + val['score']);
-				console.log("description"  + ": " + val['descrip']);
-
-			$("#icon_results").append("<div class='row' id='icon_res1'>"
-		      			+ "<div class='col-xs-2 icon_res_row'>"
-		      			+ "<i class='icon_rand fa " 
-		      			+ val['icon']
-		      			+ " fa-3x'></i>"
-		      			+ "</div>"
-		      			+ "<div class='col-xs-8 icon_desc_row'>"
-			      		+	val['descrip']
-			      		+ "</div>"
-			      		+ "<div class='col-xs-2 icon_affect'>"
-			      		+  val['score']
-		      			+ "</div>"
-		      		    + "</div>");
-		final_score += val['score'];
-
-	});
-	$('.icon_rand').each(function() {
-	})
-	changeColor(final_score, '.final_score'); 
-	changeColor(initial_score, '#initial_credit');
-	if (final_score >= 850) {
-		final_score = 850;
-	}
-	if (final_score <= 200) {
-		final_score = 200;
-	}
-
-	$('#total_final').text(time + clicks);
-	var total_score = time + clicks;
-	if (total_score < 20) {
-		$('#total_final').css("color", "green");	
-	}
-	else if (total_score < 25) {
-		$('#total_final').css("color", "orange");
-	}
-	else  {
-		$('#total_final').css("color", "red");
-	}
-
-
-	$('#time_taken').each(function(){
-		$(this).text(time + " clicks");
-		$(this).css("color", "red");
-	});
-
-	$('#incorrect').text(clicks);
-	$('#incorrect').css("color", "red");
-
-	$("#game_over_button").click();
-	$('.final_score').each(function(){
-		$(this).text(final_score);
-	});
-
-	}	
-
 
 var life_events = 
 {
@@ -408,6 +182,241 @@ var life_events =
 		}
 	}
 };
+
+let chapter_icons = ['fa-graduation-cap', 'fa-glass',
+	 'fa-book', 'fa-car', 'fa-briefcase', 
+	 'fa-usd', 'fa-home', 'fa-diamond', 'fa-rocket'];
+
+$(function() {
+	console.log('MENU JS IS LOADED');
+	$('#start_game_btn').click(start_game);
+	$('#chapter2').prop('disabled', true);
+	$('#chapter3').prop('disabled', true);
+
+});
+
+let rand_colors = ['purple', 'blue', 'orange', 'green', 'red'];
+$('#tu_icon').fadeIn();
+
+var countdown = false;
+var seconds_left = 11;
+var og_seconds = 11;
+var incrementer = 5;
+var map_icon_to_number = {};
+var current_chapter = 0;
+var score = 0;
+var clicks_incorrect = 0;
+var rank_array = [];
+var initial_score = 700;
+
+
+function start_game(event) {
+	console.log('start game was logged');
+	$('#menu_content').fadeOut(1000, function() {
+			$('#chapter_menu').fadeIn(1200);
+	});
+	for (var i = 0; i < chapter_icons.length;i++) {
+		icon = chapter_icons[i];
+		map_icon_to_number[icon + ""] = Math.floor((3 * Math.random()) - 0.05);
+	};
+	createChapters(1);
+};
+
+function createChapters(chapterNumber) {
+	$('#chapter_menu').fadeIn(1200);
+	$("#background").fadeIn();
+	$('body').removeClass();
+	$('#chapter_menu').empty();
+	$('body').addClass("trans_union_blue");
+	var numChapters = chapterNumber * 3;
+	$('#chapter_menu').append("<div class='row'>" +
+			"<div class='col-xs-12'>" +
+				" <div class='col-xs-12'>" +
+					"<img  id='chapters_icon' class='icon img-responsive'" +
+					 "src='./img/grey_icon.png' ></img>" + 
+				"</div></div></div>");
+	$('#chapter_menu').append(
+			"<div id='timer_count_down_div'>"
+			+ "<h1 id='timer'>" +  seconds_left + "</h1>");
+	temp_sorted = [];
+	for (var game1 = 0; game1 < numChapters; game1++) {
+		console.log(life_events[chapter_icons[game1] + ""]);
+		console.log([map_icon_to_number[chapter_icons[game1] + ""]]);
+		
+		//temp sorted will contain the mappings of iconName to value
+		var curIconName = chapter_icons[game1];
+		temp_sorted.push([chapter_icons[game1], 
+							life_events[curIconName + ""]
+							[map_icon_to_number[curIconName]]['value']
+					 ]);
+	}
+	temp_sorted.sort(function(a, b) {
+		return b[1] - a[1];
+	});
+	rank_array = [];
+	for (var each = 0; each < temp_sorted.length; each++) {
+		var curIconName = temp_sorted[each][0];
+		console.log(curIconName + ": " + temp_sorted[each][1]);
+		var icon_object = {
+			"rank": each, 
+			"icon" : curIconName,
+			"score": temp_sorted[each][1],
+			"descrip": life_events[curIconName + ""]
+				[map_icon_to_number[curIconName + ""]]
+					["description"]
+			};
+		rank_array.push(icon_object);
+	}
+	var count = 0;
+	//temp sorted = [[icon_name, point_value]]
+	for (var i = 0; i < temp_sorted.length; i++) {
+		var curIconName = temp_sorted[i][0];
+	$('#chapter_menu').append("<div id='row" +  i + "' class='row chapter_row'>" +
+		"<div class='col-xs-4 chapter_icon_container'>" + 
+			"<i class='fa " + curIconName + " chapter_icon fa-4x'></i>" + 
+			"</div>" + 
+			"<div class='col-xs-8'>" +
+				"<div class='chapter_btn_container'>" + 
+					"<p class='icon_descrip'>" 
+					 + life_events[curIconName + ""]
+					 [map_icon_to_number[curIconName + ""]]
+					 ["description"] +  "</p>" + 
+				"</div>" +
+			"</div>" + 
+		"</div>");
+	}
+	for (var i = 0; i < temp_sorted.length; i++) {
+		var curIconName = temp_sorted[i][0];
+		console.log(curIconName);
+		if (i > 0) {
+			$('#row_chap_arrows').append("<b class='col-xs-2 arrow'>-></b>");
+		}
+		$('#row_chap_arrows').append("<b class='fa chapter_icon "
+ 			+ curIconName + " fa-4x col-xs-2'>" 
+ 			+ " </b>");
+		
+	}
+	countdown = true;
+	$("body").css("padding-bottom", "15px");
+};
+
+var countdown_interval = window.setInterval(function() {
+	if (countdown) {
+		seconds_left -= 1;
+		$("#timer").text("Seconds Left: " + seconds_left);
+		$("#timer_count_down_div").css("text-align", 'center');
+		if(seconds_left == 0) {
+			console.log('seconds ended');
+			$("#chapter_menu").fadeOut();
+			$("#background").fadeOut();
+			$('body').removeClass();
+			$('body').addClass("background_white");
+			countdown = false;
+			rank_array.forEach(function(val){
+				console.log("rank"  + ": " + val['rank'] );
+				console.log("icon"  + ": " + val['icon'] );
+				console.log("score"  + ": " + val['score'] );
+			});
+			$('#game_board').fadeIn();
+			start(rank_array);
+			seconds_left = og_seconds + incrementer;
+			og_seconds = seconds_left;
+		}
+	}
+}, 1000);
+
+
+function changeColor(final_score, class_name) {
+if (final_score < 600) {
+		$(class_name).each(function(){
+			$(this).css("color", 'red');
+		});
+	}
+	else if (final_score >= 600 && final_score < 657) {
+		$(class_name).each(function(){
+			$(this).css("color", 'OrangeRed');
+		});
+	}
+	else if (final_score >= 657 && final_score < 719) {
+		$(class_name).each(function(){
+			$(this).css("color", 'orange');
+		});
+	}
+	else if (final_score >= 719 && final_score < 780) {
+		$(class_name).each(function(){
+			$(this).css("color", 'gold');
+		});
+	}
+	else if (final_score >= 780 && final_score <= 800) {
+		$(class_name).each(function(){
+			$(this).css("color", 'YellowGreen');
+		});
+	}
+}
+
+function game_over(time, clicks) {
+	console.log("game over button");
+	$("#icon_results").empty();
+	var adder = 0;
+	var final_score = initial_score;
+	rank_array.forEach(function(val){
+			$("#icon_results").append("<div class='row' id='icon_res1'>"
+		      			+ "<div class='col-xs-3 icon_res_row'>"
+		      			+ "<i class='icon_rand fa " 
+		      			+ val['icon']
+		      			+ " fa-3x'></i>"
+		      			+ "</div>"
+		      			+ "<div class='col-xs-8 icon_desc_row'>"
+			      		+	val['descrip']
+			      		+ "</div>"
+			      		+ "<div class='col-xs-2 icon_affect'>"
+			      		+  val['score']
+		      			+ "</div>"
+		      		    + "</div>");
+		final_score += val['score'];
+
+	});
+	$('.icon_rand').each(function() {
+	})
+	changeColor(final_score, '.final_score'); 
+	changeColor(initial_score, '#initial_credit');
+	if (final_score >= 850) {
+		final_score = 850;
+	}
+	if (final_score <= 200) {
+		final_score = 200;
+	}
+
+	$('#total_final').text(time + clicks);
+	var total_score = time + clicks;
+	if (total_score < 60) {
+		$('#total_final').css("color", "green");
+		$("#time_taken").css("color", "green");
+
+	}
+	else if (total_score < 90) {
+		$('#total_final').css("color", "orange");
+		$("#time_taken").css("color", "orange");
+	}
+	else  {
+		$('#total_final').css("color", "red");
+		$("#time_taken").css("color", "red");
+	}
+
+	$('#time_taken').text(time + " seconds");
+
+	$('#incorrect').text(clicks);
+	$('#incorrect').css("color", "red");
+
+	$("#game_over_button").click();
+	$('.final_score').each(function(){
+		$(this).text(final_score);
+	});
+	
+	$('#menu_content').fadeIn(1000);	
+}	
+
+
 
 
 /**
