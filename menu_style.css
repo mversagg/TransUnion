@@ -95,7 +95,7 @@ body {
 }
 
 .chapter_icon_container {
-	text-align: center;
+	text-align: right;
 }
 
 /*This is the big logo*/
@@ -117,15 +117,9 @@ body {
 	font-size: 150% !important;
 }
 
-#timer {
-	color: white;
-	font-size: 200% !important;
-	text-align: left;
-
-}
 
 .icon_res_row {
-	margin-top: 15px;
+	margin-top: 30px;
 }
 
 
@@ -138,4 +132,38 @@ body {
 	color: green;
 }
 
+#timer {
+	margin-left: auto;
+	margin-right: auto;
+	font-size: : 400% !important;
+	text-align: center;
+	color: white;
+}
+#timer_count_down_div {
+	margin-left: auto;
+	margin-right: auto;
+	font-size: : 200%;
+	text-align: center;
+}
 
+#ournames {
+	position: fixed;
+	bottom: 0px; 
+	right: 10px;
+	font-size:125% !important;
+}
+
+#row_chap_arrows {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+#encourage {
+	font-size:300% !important;
+
+}
+.arrow {
+	text-align: center;
+	font-size: 200%;
+	color: white;
+}

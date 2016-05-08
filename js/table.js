@@ -63,7 +63,6 @@ function showHint() {
 
 function endGame(t, mc) {
 	clearInterval(gameInterval);
-
 	if (chapterNumber <= 3) {
 		$('#game_board').fadeOut(function() {
 			$('.tracker').each(function() {
