@@ -106,6 +106,9 @@ function gameController(event) {
 	let clickIcon = $(event.currentTarget.childNodes[0])[0].classList[2];
 	
 	if (clickIcon === gameData[rankIndex].icon) {
+		let audio = new Audio('assets/ding.wav');
+		audio.play();
+
 		$('.tracker').each(function() {
 			let track = $(this);
 			if (track.data('rank') == rankIndex) {
@@ -113,6 +116,7 @@ function gameController(event) {
 			}
 		});
 		rankIndex += 1;
+		$('#hintBox').text('');
 	} else {
 		missedClicks += 1;
 	}
