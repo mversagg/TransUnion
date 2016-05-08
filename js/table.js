@@ -56,6 +56,11 @@ function start(data) {
 	}, 1000);
 }
 
+function showHint() {
+	$('#hintBox').text(gameData[rankIndex].descrip);
+	missedClicks += 2;
+}
+
 function endGame(t, mc) {
 	clearInterval(gameInterval);
 
